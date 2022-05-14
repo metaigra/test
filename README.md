@@ -15,12 +15,10 @@ C:\Windows\System32\drivers\etc\hosts
 Среду можно использовать свою (см. на ютюбе, как поднять Wordpress сайт на локальной машине).
 
 Или развернуть доккер:
-* Активировать WSL (Widnows): https://docs.microsoft.com/en-us/windows/wsl/install
-* Установить доккер: https://docs.docker.com/desktop/windows/install/
 
-После этого поднять среду:
-
-c:\test\docker\test\> ..\..\utils\make build
+1. Установить WSL (Windows): c:\> wsl --install
+2. Установить доккер: https://docs.docker.com/desktop/windows/install/
+3. После этого поднять среду: c:\test\docker\test\> ..\..\utils\make build
 
 ### 4. Проверить, что всё работает
 
