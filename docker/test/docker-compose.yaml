@@ -3,8 +3,8 @@ version: '3.8'
 services:
 
   mysql:
-    image: dev_mysql/latest
-    container_name: dev_mysql
+    image: test_mysql/latest
+    container_name: test_mysql
     restart: always
     command: --general-log-file=/var/log/mysql/mysql.log --skip-name-resolve
     volumes:
@@ -18,8 +18,9 @@ services:
       MYSQL_DATABASE: wordpress   
 
   wordpress:
-    image: dev_wp/latest    
-    container_name: dev_wp
+    #image: test_wp/latest    
+    image: wordpress:php7.4-fpm
+    container_name: test_wp
     restart: always
     expose:
       - 8080:80
@@ -39,15 +40,15 @@ services:
     links:
       - mysql
     volumes:
-      - ../../www/:/var/www/
+      - ../../www:/var/www/html:delegated
       - ../../.log:/var/log
 
   nginx:
-    #image: nginx:alpine
-    image: dev_nginx/latest
-    container_name: dev_nginx
+    image: test_nginx/latest
+    container_name: test_nginx
     volumes:      
       - ./nginx/:/etc/nginx/conf.d/
+      - ../../www:/var/www/html
       - ../../.log/nginx:/var/log/nginx
     ports:
       - 80:80
@@ -55,7 +56,7 @@ services:
       - wordpress
       
   phpmyadmin:
-    container_name: dev_phpadmin
+    container_name: test_phpadmin
     depends_on:
     - mysql
     image: phpmyadmin/phpmyadmin

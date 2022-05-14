@@ -1,2 +1,4 @@
 FROM nginx:alpine
-COPY www /var/www/html/
+
+ENV TERM xterm-256color
+

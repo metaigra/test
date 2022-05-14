@@ -1,6 +1,7 @@
 ﻿FROM wordpress:php7.4-fpm
-
 # WORKDIR ./../../www
+
+ENV TERM xterm-256color
 
 # APT Update/Upgrade, then install packages we need
 RUN apt update && \    
