@@ -12,6 +12,13 @@ C:\Windows\System32\drivers\etc\hosts
 
 ### 3. Поднять среду
 
+Среду можно использовать свою, или развернуть доккер:
+
+* Активировать WSL (Widnows): https://docs.microsoft.com/en-us/windows/wsl/install
+* Установить доккер: https://docs.docker.com/desktop/windows/install/
+
+После этого поднять среду:
+
 c:\test\docker\test\> ..\..\utils\make build
 
 ### 4. Проверить, что всё работает
