@@ -12,8 +12,9 @@ C:\Windows\System32\drivers\etc\hosts
 
 ### 3. Поднять среду
 
-Среду можно использовать свою, или развернуть доккер:
+Среду можно использовать свою (см. на ютюбе, как поднять Wordpress сайт на локальной машине).
 
+Или развернуть доккер:
 * Активировать WSL (Widnows): https://docs.microsoft.com/en-us/windows/wsl/install
 * Установить доккер: https://docs.docker.com/desktop/windows/install/
 
