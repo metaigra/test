@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+
+  mysql:
+    image: dev_mysql/latest
+    container_name: dev_mysql
+    restart: always
+    command: --general-log-file=/var/log/mysql/mysql.log --skip-name-resolve
+    volumes:
+      - db:/var/lib/mysql:delegated
+      - ../../.log/mysql/:/var/log/mysql/
+      #- ./etc/mysql/my.cnf:/etc/mysql/my.conf
+    environment:
+      MYSQL_ROOT_PASSWORD: 1
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 1
+      MYSQL_DATABASE: wordpress   
+
+  wordpress:
+    image: dev_wp/latest    
+    container_name: dev_wp
+    restart: always
+    expose:
+      - 8080:80
+    environment:
+      VIRTUAL_HOST: test.metaigra.ru, www.test.metaigra.ru      
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: admin
+      WORDPRESS_DB_PASSWORD: 1
+      MYSQL_ROOT_PASSWORD: 1
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_DEBUG: true      
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_HOME', 'http://test.metaigra.ru');
+        define('WP_SITEURL', 'http://test.metaigra.ru');  
+      XDEBUG_CONFIG: client_host=192.168.89.1
+    links:
+      - mysql
+    volumes:
+      - ../../www/:/var/www/
+      - ../../.log:/var/log
+
+  nginx:
+    #image: nginx:alpine
+    image: dev_nginx/latest
+    container_name: dev_nginx
+    volumes:      
+      - ./nginx/:/etc/nginx/conf.d/
+      - ../../.log/nginx:/var/log/nginx
+    ports:
+      - 80:80
+    links:
+      - wordpress
+      
+  phpmyadmin:
+    container_name: dev_phpadmin
+    depends_on:
+    - mysql
+    image: phpmyadmin/phpmyadmin
+    restart: always      
+    ports:
+      - 8080:80
+    environment:
+      MYSQL_ROOT_PASSWORD: 1 
+      PMA_HOST: mysql
+
+volumes:
+  wordpress:
+  db:
