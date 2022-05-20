@@ -18,7 +18,7 @@ C:\Windows\System32\drivers\etc\hosts
 
 1. Установить WSL (Windows): c:\> wsl --install
 2. Установить доккер: https://docs.docker.com/desktop/windows/install/
-3. После этого поднять среду: c:\test\docker\test\> ..\..\utils\make build
+3. После этого поднять среду: c:\test\docker\test\> ..\\..\utils\make build
 
 ### 4. Проверить, что всё работает
 
